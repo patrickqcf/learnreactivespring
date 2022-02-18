@@ -12,10 +12,10 @@ public class FluxAndMonoBackPressureTest {
                 .log();
         StepVerifier.create(finiteFlux)
                 .expectSubscription()
+                .thenRequest(3)
+                .expectNext(1,2,3)
                 .thenRequest(1)
-                .expectNext(1)
-                .thenRequest(1)
-                .expectNext(2)
+                .expectNext(4)
                 .thenCancel()
                 .verify();
 
